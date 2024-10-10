@@ -12,16 +12,21 @@ const Reviews = () => {
       .catch((err) => console.log(err.message));
   }, [movieId]);
 
+  console.log(reviews);
   return (
     <div>
-      <ul>
-        {reviews.map(({ created_at, content, author }) => (
-          <li key={created_at}>
-            <h4>Author: {author}</h4>
-            <p>{content}</p>
-          </li>
-        ))}
-      </ul>
+      {reviews.length ? (
+        <ul>
+          {reviews.map(({ created_at, content, author }) => (
+            <li key={created_at}>
+              <h4>Author: {author}</h4>
+              <p>{content}</p>
+            </li>
+          ))}
+        </ul>
+      ) : (
+        <p>We don't have any reviews for this movie</p>
+      )}
     </div>
   );
 };

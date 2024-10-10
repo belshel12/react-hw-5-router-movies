@@ -11,7 +11,7 @@ const SearchBar = ({ setParams }) => {
     e.preventDefault();
     if (value === "") {
       setParams({});
-		return
+      return;
     }
     setParams({ filter: value.toLowerCase().trim() });
     setValue("");
