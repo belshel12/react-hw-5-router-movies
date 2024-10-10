@@ -26,6 +26,13 @@ export const getReview = async (id) => {
   const response = await axios.get(
     `https://api.themoviedb.org/3/movie/${id}/reviews?api_key=${API_KEY}`
   );
-  console.log(response.data.response);
+  return response.data;
+};
+
+export const getCast = async (id) => {
+  const response = await axios.get(
+    `https://api.themoviedb.org/3/movie/${id}/credits?api_key=${API_KEY}`
+  );
+  console.log(response.data);
   return response.data;
 };

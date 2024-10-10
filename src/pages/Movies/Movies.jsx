@@ -1,31 +1,24 @@
-import { useState } from "react";
-import { getMovie } from "../../services/getApi";
+import { useEffect, useState } from "react";
 import MovieList from "../../components/MovieList/MovieList";
+import SearchBar from "../../components/SearchBar/SearchBar";
+import { useSearchParams } from "react-router-dom";
+import { getMovie } from "../../services/getApi";
 
 const Movies = () => {
-  const [queryValue, setQueryValue] = useState("");
   const [movies, setMovies] = useState([]);
-  const handleChange = (e) => {
-    setQueryValue(e.target.value);
-  };
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    getMovie(queryValue)
+  const [searchParams, setSearchParams] = useSearchParams();
+  const query = searchParams.get("filter") ?? "";
+
+  useEffect(() => {
+    getMovie(query)
       .then((data) => setMovies(data.results))
       .catch((err) => console.log(err.message));
-
-    setQueryValue("");
-  };
+  }, [query, searchParams]);
 
   return (
     <>
-      <form onSubmit={handleSubmit}>
-        <input type="text" onChange={handleChange} value={queryValue} />
-        <button>Search</button>
-      </form>
-      <div>
-        <MovieList movies={movies} />
-      </div>
+      <SearchBar setParams={setSearchParams} />
+      <MovieList movies={movies} />
     </>
   );
 };

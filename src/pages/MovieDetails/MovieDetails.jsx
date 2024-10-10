@@ -5,6 +5,7 @@ import { getDetails } from "../../services/getApi";
 const MovieDetails = () => {
   const [movie, setMovie] = useState({});
   const { movieId } = useParams();
+
   useEffect(() => {
     getDetails(movieId)
       .then((data) => {
@@ -33,7 +34,10 @@ const MovieDetails = () => {
             {genres
               ? genres
                   .slice(0, 3)
-                  .map(({ name, id }) => <span key={id}>{name}</span>)
+                  .sort((a, b) => a.name.localeCompare(b.name))
+                  .map(({ id, name }) => {
+                    return <span key={id}>{`${name} `}</span>;
+                  })
               : ""}
           </p>
         </div>

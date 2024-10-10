@@ -11,8 +11,6 @@ const HomePage = () => {
     });
   }, []);
 
-  console.log(movies);
-
   return (
     <>
       <ul>
@@ -24,6 +22,6 @@ const HomePage = () => {
       </ul>
     </>
   );
-}
+};
 
 export default HomePage;
