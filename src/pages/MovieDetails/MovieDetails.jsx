@@ -1,6 +1,7 @@
-import { useEffect, useRef, useState } from "react";
+import { Suspense, useEffect, useRef, useState } from "react";
 import { Link, Outlet, useLocation, useParams } from "react-router-dom";
 import { getDetails } from "../../services/getApi";
+import Loader from "../../components/Loader/Loader";
 
 const MovieDetails = () => {
   const [movie, setMovie] = useState({});
@@ -57,7 +58,9 @@ const MovieDetails = () => {
               <Link to="reviews">Reviews</Link>
             </li>
           </ul>
-          <Outlet />
+          <Suspense>
+            <Outlet fallback={<Loader />} />
+          </Suspense>
         </div>
       </div>
     </>

@@ -33,6 +33,5 @@ export const getCast = async (id) => {
   const response = await axios.get(
     `https://api.themoviedb.org/3/movie/${id}/credits?api_key=${API_KEY}`
   );
-  console.log(response.data);
   return response.data;
 };
